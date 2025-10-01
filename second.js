@@ -13,5 +13,6 @@ const response = await fetch(
   const drinkDiv = document.createElement("div");
   drinkDiv.id = "drink-div";
   drinkDiv.style.backgroundImage = secondThumbnail;  
-  bkgDiv.appendChild(drinkDiv); 
+  const tableDiv = document.getElementById("table-div");
+  tableDiv.appendChild(drinkDiv); 
 }

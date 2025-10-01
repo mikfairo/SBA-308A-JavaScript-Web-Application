@@ -8,9 +8,8 @@ html {
   width: 100%;
   object-fit: fill;
   background-repeat: no-repeat;
-  /* justify-items: center;
-  align-content: center; */
-  z-index: -1;
+  background-size: 100%;
+  z-index: 0;
   /* top: 0; */
 }
 #table-div {
@@ -33,8 +32,11 @@ html {
   background-size: contain;
 }
 #drink-div {
+position: absolute;
   background-color: black;
   border-radius: 180px;
+  top: 210px;
+  left: 530px;
   height: 180px;
   width: 180px;
   background-size: contain;
@@ -48,3 +50,15 @@ h1 {
   align-items: center; */
   text-align: center;
 }
+button {
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 8px;
+  /* font-size: medium; */
+  text-align: center;
+  margin-top: 3%;
+}
+button:hover {
+  background-color: rgb(116, 198, 253);
+}
+
