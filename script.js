@@ -9,7 +9,8 @@ async function initialLoad() {
 
   const dishDiv = document.createElement("div");
   dishDiv.id = "dish-div";
-  dishDiv.style.backgroundImage = await getThumbnailString(); //to add the photo from link to the dish div
+  const [thumbnailUrl, mealName] = await getMealInfo(); //get a new thumbnail
+  dishDiv.style.backgroundImage = thumbnailUrl; //to add the photo from link to the dish div
   tableDiv.appendChild(dishDiv);
 
   const dinnerButton = document.createElement("button");
@@ -19,12 +20,23 @@ async function initialLoad() {
     const oldThumbnail = document.getElementById("dish-div");
     const newThumbnail = document.createElement("div");
     newThumbnail.id = "dish-div";
-    newThumbnail.style.backgroundImage = await getThumbnailString();
+    const [thumbnailUrl, mealName] = await getMealInfo(); //get a new thumbnail
+    newThumbnail.style.backgroundImage = thumbnailUrl;
     oldThumbnail.replaceWith(newThumbnail);
+
+    const oldHeader = document.getElementById("detailHeader");
+    const detailHeader = createAndStyleHeader(); //function from third.js
+    let info = mealName;
+    detailHeader.innerHTML = `${info}`;
+    oldHeader.replaceWith(detailHeader);
   });
   tableDiv.appendChild(dinnerButton);
+  const detailHeader = createAndStyleHeader();
+  let info = mealName;
+  detailHeader.innerHTML = `${info}`;
+  document.body.appendChild(detailHeader);
 }
-async function getThumbnailString() {
+async function getMealInfo() {
   //gets random string from api
   const response = await fetch(
     "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -33,7 +45,9 @@ async function getThumbnailString() {
   console.log(data);
   const thumbnail = `url(${data.meals[0].strMealThumb})`;
   console.log(thumbnail);
-  return thumbnail;
+  const mealName = data.meals[0].strMeal;
+  console.log(mealName);
+  return [thumbnail, mealName];
 }
 
 initialLoad();
